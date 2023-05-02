@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books table</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
+</head>
+<body>
+
+
+<h1 th:text="TABLE"></h1>
+
+    <table class="table table-striped table-sm table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>author</th>
+                <th>price</th>
+                <th>year</th>
+                <th>publisher</th>
+                <th>numberOfPages</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="s : ${booksTable}">
+                <td th:text="${s.id}"></td>
+                <td th:text="${s.name}"></td>
+                <td th:text="${s.author}"></td>
+                <td th:text="${s.price}"></td>
+                <td th:text="${s.year}"></td>
+                <td th:text="${s.publisher}"></td>
+                <td th:text="${s.numberOfPages}"></td>
+                <td> <a th:href="@{/deleteThisBook(id=${s.id})}" class="btn btn-danger btn-sm">delete</a> </td>
+            </tr>
+        </tbody>
+    </table>
+
+<a href="save" class="btn btn-success btn-sm">save</a>
+<br>
+<br>
+    <form action="addBook" method="post">
+        <input type="number" name="id" placeholder="id">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="author" placeholder="author">
+        <input type="number" name="price" placeholder="price">
+        <input type="number" name="year" placeholder="year">
+        <input type="text" name="publisher" placeholder="publisher">
+        <input type="number" name="numberOfPages" placeholder="numberOfPages">
+
+        <input type="submit" value="Add" class="btn btn-dark btn-sm">
+    </form>
+
+
+
+<br>
+<h3>a) список книг заданого автора</h3>
+<form action="booksByAuthor" method="get">
+    <input type="text" name="author" placeholder="author">
+
+    <input type="submit" value="Show">
+</form>
+
+
+<h3>b) список книг, що видані заданим видавництвом</h3>
+<form action="booksByPublisher" method="get">
+    <input type="text" name="publisher" placeholder="publisher">
+
+    <input type="submit" value="Show">
+</form>
+
+
+
+<h3>c) список книг, що випущені після заданого року</h3>
+<form action="booksAfterYear" method="get">
+    <input type="number" name="year" placeholder="year">
+
+    <input type="submit" value="Show">
+</form>
+
+
+
+<script th:src="@{/webjars/jquery/3.6.4/dist/jquery.js}"></script>
+<script th:src="@{/webjars/popperjs__core/2.11.7/dist/umd/popper.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.3.0-alpha2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>
+
+
